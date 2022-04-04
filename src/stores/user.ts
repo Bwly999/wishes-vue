@@ -1,33 +1,36 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
+import { login as apiLogin } from '~/api/login'
 
-export const useUserStore = defineStore('user', () => {
-  /**
-   * Current name of the user.
-   */
-  const savedName = ref('')
-  const previousNames = ref(new Set<string>())
+export const useUserStore = defineStore({
+  id: 'user',
+  state: () => ({
+    name: 'Eduardo',
+    isAdmin: true,
+  }),
 
-  const usedNames = computed(() => Array.from(previousNames.value))
-  const otherNames = computed(() => usedNames.value.filter(name => name !== savedName.value))
+  actions: {
+    logout() {
+      this.$patch({
+        name: '',
+        isAdmin: false,
+      })
 
-  /**
-   * Changes the current name of the user and saves the one that was used
-   * before.
-   *
-   * @param name - new name to set
-   */
-  function setNewName(name: string) {
-    if (savedName.value)
-      previousNames.value.add(savedName.value)
+      // we could do other stuff like redirecting the user
+    },
 
-    savedName.value = name
-  }
-
-  return {
-    setNewName,
-    otherNames,
-    savedName,
-  }
+    /**
+     * Attempt to login a user
+     * @param {string} user
+     * @param {string} password
+     */
+    async login(user: string, password: string) {
+      const userData = await apiLogin(user, password)
+      console.log(...userData.data)
+      this.$patch({
+        name: user,
+      })
+    },
+  },
 })
 
 if (import.meta.hot)
