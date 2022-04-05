@@ -4,6 +4,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import { createWebHistory } from 'vue-router'
 import { routerBeforeEach } from './router'
 import App from './App.vue'
+import './api/mock/index'
 
 import '@unocss/reset/tailwind.css'
 import './styles/main.css'

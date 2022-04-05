@@ -1,31 +1,4 @@
-<script lang="ts">
-import { useRouter } from 'vue-router'
-import { reactive, toRefs } from '@vue/reactivity'
-import LoginForm from '../components/loginForm.vue'
-import { useUserStore } from '~/stores/user'
-export default {
-  components: { LoginForm },
-  setup() {
-    const userStore = useUserStore()
-    const router = useRouter()
-    const userData = reactive({
-      username: '1',
-      password: '',
-      gi: 'd',
-      loginFunc: 'UserLogin',
-      login: () => {
-        userStore.login(userData.username, userData.password).then(() => {
-          router.push('/wish')
-        }).catch(() => {
-          alert('登录失败')
-        })
-      },
-    })
-    return {
-      ...toRefs(userData),
-    }
-  },
-}
+<script setup lang="ts">
 </script>
 
 <template>
@@ -38,14 +11,6 @@ export default {
             Achieve Your Wishes
           </h2>
           <router-view />
-          <div align="center">
-            <div align="center" style="color:#ffffcc">
-              还没有帐号？
-              <router-link to="/login/register">
-                点击注册
-              </router-link>
-            </div>
-          </div>
         </div>
       </div>
     </div>

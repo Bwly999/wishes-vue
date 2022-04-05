@@ -1,5 +1,6 @@
 import { acceptHMRUpdate, defineStore } from 'pinia'
 import { login as apiLogin } from '~/api/login'
+import { setToken } from '~/utils/auth'
 
 export const useUserStore = defineStore({
   id: 'user',
@@ -24,10 +25,16 @@ export const useUserStore = defineStore({
      * @param {string} password
      */
     async login(user: string, password: string) {
-      const userData = await apiLogin(user, password)
-      console.log(...userData.data)
-      this.$patch({
-        name: user,
+      return new Promise((resolve, reject) => {
+        apiLogin(user, password).then((response) => {
+          // this.$patch({
+          //   name: user,
+          // })
+          setToken(response.data.data.access_token)
+          resolve(response)
+        }).catch((e) => {
+          reject(e)
+        })
       })
     },
   },

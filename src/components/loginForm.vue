@@ -13,8 +13,8 @@ export default {
       loginFunc: 'UserLogin',
       login: () => {
         userStore.login(userData.username, userData.password).then(() => {
-          router.push('/wish')
-        }).catch(() => {
+          router.push('/wishes')
+        }).catch((e) => {
           alert('登录失败')
         })
       },

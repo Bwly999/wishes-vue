@@ -2,15 +2,15 @@
 import { useRouter } from 'vue-router'
 import { reactive, toRefs } from '@vue/reactivity'
 import { useUserStore } from '~/stores/user'
-import { register } from '~/api/login'
+import { register as registerApi, verifyCaptcha } from '~/api/login'
 export default {
   setup() {
     const userStore = useUserStore()
     const router = useRouter()
-    const captchaTip = ref<string>('获取验证码')
-    const canSendCaptcha = ref<boolean>(false)
+    const canSendCaptcha = ref<boolean>(true)
+    const captchaTime = ref(0)
     const userData = reactive({
-      username: '1',
+      username: '',
       password: '',
       confirmPassword: '',
       email: '',
@@ -21,7 +21,7 @@ export default {
         userStore.login(userData.username, userData.password).then(() => {
           router.push('/wish')
         }).catch(() => {
-          alert('登录失败')
+          ElMessage.error('登录失败')
         })
       },
       getCaptcha: () => {
@@ -30,21 +30,47 @@ export default {
           password: userData.password,
           email: userData.email,
         }
-        register(data).then(() => {
+        registerApi(data).then(() => {
           ElMessage({
             message: '获取成功',
             type: 'success',
           })
+          canSendCaptcha.value = false
+          captchaTime.value = 60
+          const captchaWait = setInterval(() => {
+            captchaTime.value--
+            if (captchaTime.value <= 0) {
+              clearInterval(captchaWait)
+              canSendCaptcha.value = true
+            }
+          }, 1000)
         }).catch(() => {
           ElMessage.error('获取验证码失败')
+        })
+      },
+      register: () => {
+        const data = {
+          userName: userData.username,
+          password: userData.password,
+          email: userData.email,
+          captcha: userData.captcha,
+        }
+        verifyCaptcha(data).then(() => {
+          ElMessage({
+            message: '注册成功',
+            type: 'success',
+          })
+          router.push('/login')
+        }).catch(() => {
+          ElMessage.error('注册失败')
         })
       },
     })
 
     return {
       ...toRefs(userData),
-      captchaTip,
       canSendCaptcha,
+      captchaTime,
     }
   },
 }
@@ -70,20 +96,17 @@ export default {
     </div>
     <div flex justify-between class="mt-4">
       <el-input v-model="captcha" class="!border-gray-500 !w-20vh" placeholder="请输入验证码" />
-      <el-button class="!bg-blue-500 !text-white-100 !rounded-xl !border-none" type="primary" text="" :disabled="!canSendCaptcha" @click="getCaptcha">
-        {{ captchaTip }}
+      <el-button v-show="canSendCaptcha" class="!rounded-xl" type="primary" text="" @click="getCaptcha">
+        获取验证码
+      </el-button>
+      <el-button v-show="!canSendCaptcha" class="!rounded-xl" type="primary">
+        {{ captchaTime }}秒后重新获取
       </el-button>
     </div>
-    <div class="mb2" @click="register1">
+    <div class="mb2" @click="register">
       <a class="act-but submit" style="color: #FFFFFF">注册</a>
     </div>
   </el-form>
-  <!-- <el-form>
-    <el-input class="u_user">
-      用户名
-    </el-input>
-    <el-input>用户名 </el-input>
-  </el-form> -->
 </template>
 
 <style scoped src="~/styles/login/demo.css"></style>

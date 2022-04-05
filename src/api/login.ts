@@ -17,7 +17,15 @@ export function login(username: string, password: string) {
 
 export function register(data: any) {
   return request({
-    url: '/users/user',
+    url: '/user/users',
+    method: 'post',
+    data,
+  })
+}
+
+export function verifyCaptcha(data: any) {
+  return request({
+    url: '/user/users/captcha',
     method: 'post',
     data,
   })
