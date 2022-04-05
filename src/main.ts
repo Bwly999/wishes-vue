@@ -1,7 +1,7 @@
 import { ViteSSG } from 'vite-ssg'
 import generatedRoutes from 'virtual:generated-pages'
 import { setupLayouts } from 'virtual:generated-layouts'
-import { createRouter, createWebHistory } from 'vue-router'
+import { createWebHistory } from 'vue-router'
 import { routerBeforeEach } from './router'
 import App from './App.vue'
 

@@ -5,8 +5,16 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Counter: typeof import('./components/Counter.vue')['default']
+    ElButton: typeof import('element-plus/es')['ElButton']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElInput: typeof import('element-plus/es')['ElInput']
+    ElOption: typeof import('element-plus/es')['ElOption']
+    ElSelect: typeof import('element-plus/es')['ElSelect']
+    ElUpload: typeof import('element-plus/es')['ElUpload']
     Footer: typeof import('./components/Footer.vue')['default']
+    LoginForm: typeof import('./components/loginForm.vue')['default']
     README: typeof import('./components/README.md')['default']
+    RegisterForm: typeof import('./components/registerForm.vue')['default']
   }
 }
 

@@ -15,9 +15,9 @@ export function login(username: string, password: string) {
   })
 }
 
-export function loginUp(data: any) {
+export function register(data: any) {
   return request({
-    url: '/user/add',
+    url: '/users/user',
     method: 'post',
     data,
   })

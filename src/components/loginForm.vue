@@ -1,10 +1,8 @@
 <script lang="ts">
 import { useRouter } from 'vue-router'
 import { reactive, toRefs } from '@vue/reactivity'
-import LoginForm from '../components/loginForm.vue'
 import { useUserStore } from '~/stores/user'
 export default {
-  components: { LoginForm },
   setup() {
     const userStore = useUserStore()
     const router = useRouter()
@@ -21,6 +19,7 @@ export default {
         })
       },
     })
+
     return {
       ...toRefs(userData),
     }
@@ -29,28 +28,16 @@ export default {
 </script>
 
 <template>
-  <div class=" demo-1">
-    <div class="content">
-      <div id="large-header" class="large-header">
-        <canvas id="demo-canvas" />
-        <div class="logo_box">
-          <h2 align="center">
-            Achieve Your Wishes
-          </h2>
-          <router-view />
-          <div align="center">
-            <div align="center" style="color:#ffffcc">
-              还没有帐号？
-              <router-link to="/login/register">
-                点击注册
-              </router-link>
-            </div>
-          </div>
-        </div>
-      </div>
+  <form action="#" name="f" method="post">
+    <div class="input_outer">
+      <span class="u_user" /><input v-model="username" class="text" name="logname" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+    </div><div class="input_outer">
+      <span class="us_uer" /><input v-model="password" class="text" name="logpass" style="color: #FFFFFF !important;" type="password" placeholder="请输入密码">
+    </div><div class="mb2" @click="login">
+      <a class="act-but submit" style="color: #FFFFFF">登录</a>
     </div>
-  </div>
+  </form>
 </template>
 
-<!-- <style scoped src="~/styles/login/demo.css"></style> -->
+<style scoped src="~/styles/login/demo.css"></style>
 <style scoped src="~/styles/login/component.css"></style>
