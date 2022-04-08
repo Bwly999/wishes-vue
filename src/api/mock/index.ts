@@ -23,3 +23,49 @@ const verifyCaptchaData = {
   data: null,
 }
 Mock.mock(/\/user\/users\/captcha/, 'post', () => verifyCaptchaData)
+
+const listTaskData = {
+  errno: 0,
+  errmsg: '成功',
+  data: {
+    total: 10,
+    page: 1,
+    pages: 1,
+    list: [
+      {
+        initiatorId: 1,
+        initiatorName: '张三',
+        receiverId: undefined,
+        type: '解答',
+        title: '怎么简单获得志愿者工时',
+        description: '怎么简单获得志愿者工时',
+        imageUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        location: '映雪',
+        price: '100',
+      },
+      {
+        initiatorId: 1,
+        initiatorName: '张三',
+        receiverId: undefined,
+        type: '解答',
+        title: '求助1v1字节跳动面试经验',
+        description: '求助1v1字节跳动面试经验',
+        imageUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        location: '博学',
+        price: '100',
+      },
+      {
+        initiatorId: 1,
+        initiatorName: '张三',
+        receiverId: undefined,
+        type: '交易',
+        title: '出售自繁殖1cm孔雀鱼幼崽',
+        description: '求助1v1字节跳动面试经验',
+        imageUrl: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        location: '映雪',
+        price: '50',
+      },
+    ],
+  },
+}
+Mock.mock(/\/task\/tasks[\s\S]*?/, 'get', () => listTaskData)

@@ -6,12 +6,23 @@ declare module 'vue' {
   export interface GlobalComponents {
     Counter: typeof import('./components/Counter.vue')['default']
     ElButton: typeof import('element-plus/es')['ElButton']
-    ElForm: typeof import('element-plus/es')['ElForm']
-    ElInput: typeof import('element-plus/es')['ElInput']
+    ElCard: typeof import('element-plus/es')['ElCard']
+    ElDivider: typeof import('element-plus/es')['ElDivider']
+    ElImage: typeof import('element-plus/es')['ElImage']
+    ElMenu: typeof import('element-plus/es')['ElMenu']
+    ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
+    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Footer: typeof import('./components/Footer.vue')['default']
     LoginForm: typeof import('./components/loginForm.vue')['default']
+    Menu: typeof import('./components/Menu.vue')['default']
+    Plum: typeof import('./components/Plum.vue')['default']
     README: typeof import('./components/README.md')['default']
     RegisterForm: typeof import('./components/registerForm.vue')['default']
+    Solution: typeof import('./components/taskType/Solution.vue')['default']
+    TaskCard: typeof import('./components/TaskCard.vue')['default']
+    TaskFooter: typeof import('./components/TaskFooter.vue')['default']
+    Trade: typeof import('./components/taskType/Trade.vue')['default']
+    WishTask: typeof import('./components/WishTask.vue')['default']
   }
 }
 
