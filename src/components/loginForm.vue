@@ -1,38 +1,32 @@
-<script lang="ts">
+<script lang="ts" setup>
 import { useRouter } from 'vue-router'
-import { reactive, toRefs } from '@vue/reactivity'
+import { reactive } from '@vue/reactivity'
 import { useUserStore } from '~/stores/user'
-export default {
-  setup() {
-    const userStore = useUserStore()
-    const router = useRouter()
-    const userData = reactive({
-      username: '1',
-      password: '',
-      gi: 'd',
-      loginFunc: 'UserLogin',
-      login: () => {
-        userStore.login(userData.username, userData.password).then(() => {
-          router.push('/wishes')
-        }).catch((e) => {
-          alert('登录失败')
-        })
-      },
-    })
 
-    return {
-      ...toRefs(userData),
-    }
-  },
+const userStore = useUserStore()
+const router = useRouter()
+const userData = reactive({
+  username: '1',
+  password: '',
+  gi: 'd',
+  loginFunc: 'UserLogin',
+})
+
+const login = () => {
+  userStore.login(userData.username, userData.password).then(() => {
+    router.push('/wishes')
+  }).catch((e) => {
+    alert('登录失败')
+  })
 }
 </script>
 
 <template>
   <form action="#" name="f" method="post">
     <div class="input_outer">
-      <span class="u_user" /><input v-model="username" class="text" name="logname" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
+      <span class="u_user" /><input v-model="userData.username" class="text" name="logname" style="color: #FFFFFF !important" type="text" placeholder="请输入账户">
     </div><div class="input_outer">
-      <span class="us_uer" /><input v-model="password" class="text" name="logpass" style="color: #FFFFFF !important;" type="password" placeholder="请输入密码">
+      <span class="us_uer" /><input v-model="userData.password" class="text" name="logpass" style="color: #FFFFFF !important;" type="password" placeholder="请输入密码">
     </div><div class="mb2" @click="login">
       <a class="act-but submit" style="color: #FFFFFF">登录</a>
     </div>
