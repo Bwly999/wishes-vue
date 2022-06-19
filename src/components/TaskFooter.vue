@@ -9,9 +9,6 @@ export interface TaskInfo {
 const props = defineProps<{
   taskInfo: TaskInfo
 }>()
-const { type } = props.taskInfo
-console.log(type)
-console.log(getComponentByTaskType(type))
 </script>
 <template>
   <div flex content-center pb-2 items-center>

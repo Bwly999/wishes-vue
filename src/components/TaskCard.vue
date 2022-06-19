@@ -23,9 +23,8 @@ const taskInfo: TaskInfo = {
     <el-divider m-2="!" />
     <div>
       <p font-bold>
-        {{ task }}
+        {{ task.description }}
       </p>
-      <a bg-clip-text> {{ task.title }}</a>
     </div>
     <!-- <div class="bg-gradient-to-r from-red-400 to-blue-500 flex flex-col justify-center">
       <div class="inset-0 bg-gradient-to-r from-red-400 to-blue-500 shadow-lg sm:rounded-3xl">

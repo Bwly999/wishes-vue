@@ -5,13 +5,9 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Counter: typeof import('./components/Counter.vue')['default']
-    ElButton: typeof import('element-plus/es')['ElButton']
-    ElCard: typeof import('element-plus/es')['ElCard']
-    ElDivider: typeof import('element-plus/es')['ElDivider']
-    ElImage: typeof import('element-plus/es')['ElImage']
+    ElAvatar: typeof import('element-plus/es')['ElAvatar']
     ElMenu: typeof import('element-plus/es')['ElMenu']
     ElMenuItem: typeof import('element-plus/es')['ElMenuItem']
-    ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     Footer: typeof import('./components/Footer.vue')['default']
     LoginForm: typeof import('./components/loginForm.vue')['default']
     Menu: typeof import('./components/Menu.vue')['default']

@@ -19,3 +19,8 @@
 
 <!-- <style scoped src="~/styles/login/demo.css"></style> -->
 <style scoped src="~/styles/login/component.css"></style>
+
+<route lang="yaml">
+meta:
+  layout: nothing
+</route>
